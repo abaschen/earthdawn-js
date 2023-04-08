@@ -1,0 +1,26 @@
+{
+    "discipline": {
+        "archer": "Archer",
+        "beastmaster": "Maître des animaux",
+        "calvaryman": "Cavalier",
+        "elementalist": "Elémentaliste",
+        "illusionist": "Illusionniste",
+        "nethermancer": "Nécromancien",
+        "scout": "Éclaireur",
+        "skyraider": "Écumeur du ciel",
+        "swordmaster": "Maître d'armes",
+        "thief": "Voleur",
+        "troubadour": "Troubadour",
+        "warrior": "Guerrier",
+        "blacksmith": "Forgeron",
+        "wizard": "Sorcier"
+    },
+    "attributes": {
+        "strength": "Force",
+        "dexterity": "Dextérité",
+        "constitution": "Constitution",
+        "intelligence": "Intelligence",
+        "wisdom": "Sagesse",
+        "charisma": "Charisme"
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "discipline": {
+        "archer": "Archer",
+        "beastmaster": "Beastmaster",
+        "calvaryman": "Calvaryman",
+        "elementalist": "Elementalist",
+        "illusionist": "Illusionist",
+        "nethermancer": "Nethermancer",
+        "scout": "Scout",
+        "skyraider": "Skyraider",
+        "swordmaster": "Swordmaster",
+        "thief": "Thief",
+        "troubadour": "Troubadour",
+        "warrior": "Warrior",
+        "blacksmith": "Blacksmith",
+        "wizard": "Wizard"
+    }
+}
