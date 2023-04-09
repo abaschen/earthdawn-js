@@ -1,103 +1,77 @@
 <script setup lang="ts">
 import CharacterSheet from './components/CharacterSheet.vue';
+import { Attribute } from './types/Attributes';
+import { CastingDifficulty, Character, Discipline } from './types/Character';
+
+const character: Character = {
+  name: "Therandir",
+  race: "windling",
+  discipline: Discipline.wizard,
+  circle: 8,
+  currentKarma: 60,
+  maximumKarma: 60,
+  specialisations: {},
+  attributes: {
+    dexterity: new Attribute(16),
+    strength: new Attribute(14),
+    toughness: new Attribute(14),
+    perception: new Attribute(14),
+    willpower: new Attribute(16),
+    charisma: new Attribute(14),
+  },
+  "talents": {
+    "spellcasting": {
+      id: "spellcasting",
+      name: "$t.talents.spellcasting.name",
+      description: "$t.talents.spellcasting.description",
+      discipline: true,
+      rank: 20,
+      attribute: "perception",
+      action: true,
+      page: {
+        fr: 190
+      }
+
+    }
+  },
+  "skills": {
+
+  },
+  "languages": {
+    "throalic": {
+      id: "throalic",
+      read: true,
+      written: true,
+      spoken: true
+    },
+
+  },
+  "spells": {
+    "fireball": {
+      id: "fireball",
+      name: "$t.spells.fireball.name",
+      description: "$t.spells.fireball.description",
+      effect: "$t.spells.fireball.effect",
+      circle: 1,
+      discipline: Discipline.elementalist,
+      threads: 1,
+      weavingDifficulty: 10,
+      harmonizationDifficulty: 15,
+      duration: { value: 1, unit: "round" },
+      difficulty: CastingDifficulty.TMD,
+      range: 10,
+      page: {
+        fr: 190
+      }
+    }
+  },
+  legendPoints: 220000
+}
+
 </script>
 
 <template>
   <v-app>
-    <CharacterSheet :character="$data" />
+    <CharacterSheet :character="character" />
   </v-app>
 </template>
-
-
-<script setup lang="ts">
-export default {
-  components: {
-    CharacterSheet,
-  },
-  data() {
-    return {
-        "name": "Therandir",
-        "race": "Elf",
-        "discipline": "Swordmaster",
-        "circle": 5,
-        "attributes": {
-          "dexterity": 16,
-          "strength": 12,
-          "toughness": 14,
-          "perception": 14,
-          "willpower": 12,
-          "charisma": 16
-        },
-        "talents": {
-          "base_talents": {
-            "avoid_blow": 5,
-            "maneuver": 4,
-            "melee_weapons": 5,
-            "riposte": 4,
-            "taunt": 4
-          },
-          "optional_talents": {
-            "acrobatic_defense": 3,
-            "air_dance": 2,
-            "first_impression": 3,
-            "winning_smile": 2
-          }
-        },
-        "skills": {
-          "knowledge_skills": {
-            "creature_lore": 2,
-            "history": 2
-          },
-          "artisan_skills": {
-            "wood_carving": 2
-          },
-          "general_skills": {
-            "climbing": 2,
-            "swimming": 2
-          },
-          "language_skills": {
-            "dwarven": 1,
-            "human": 1
-          }
-        },
-        "equipment": {
-          "weapons": {
-            "broadsword": {
-              "damage": "STR+4",
-              "size": "2"
-            }
-          },
-          "armor": {
-            "leather_armor": {
-              "physical_armor": 5,
-              "mystic_armor": 3
-            }
-          },
-          "adventuring_gear": {
-            "backpack": 1,
-            "bedroll": 1,
-            "waterskin": 1
-          }
-        },
-        "legend_points": 1200
-      
-    };
-  },
-  computed: {
-    
-          initiative(){
-            return this.attributes.dexterity + this.circle;
-          },
-          physical_defense(){},
-          spell_defense(){},
-          social_defense(){},
-          physical_armor(){},
-          mystic_armor(){},
-          death_rating(){},
-          unconsciousness_rating(){},
-          wound_threshold(){},
-          recovery_tests(){},
-      
-  }
-};
-</script>

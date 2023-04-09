@@ -1,62 +1,59 @@
+import { Attribute, BaseAttribute } from "./Attributes";
+
 // enum of all the disciplines known in Earthdawn
 export enum Discipline {
-    "Adept",
-    "Alchemist",
-    "Animist",
-    "Artisan",
-    "Assassin",
-    "Bard",
-    "Beastmaster",
-    "Berserker",
-    "Bureaucrat",
-    "Cavalier",
-    "Cleric",
-    "Dancer",
-    "Druid",
-    "Elementalist",
-    "Engineer",
-    "Fighter",
-    "Healer",
-    "Hunter",
-    "Illusionist",
-    "Infiltrator",
-    "Knight",
-    "Mage",
-    "Mystic",
-    "Ninja",
-    "Nomad",
-    "Nun",
-    "Outlaw",
-    "Priest",
-    "Ranger",
-    "Rogue",
-    "Runemaster",
-    "Scout",
+    "archer",
+    "beastmaster",
+    "calvaryman",
+    "elementalist",
+    "illusionist",
+    "necromancer",
+    "scout",
+    "skyraider",
+    "swordmaster",
+    "thief",
+    "troubadour",
+    "warrior",
+    "blacksmith",
+    "wizard",
 }
+
 export interface Bonus {
     attribute: string;
     value: number;
 }
 
-export interface Thread {
+export interface ObjectThread {
     rank: number;
     bonus: Bonus;
+    /**
+     * if the keyEvent has not been discovered yet, this will be null
+     */
+    keyEvent?: string;
 }
 
-export interface MagicObject {
+export interface BookReference {
+    page?: { [lang: string]: number }
+}
+export interface Language {
     id: string;
-    name: string;
-    description: string;
+    spoken: boolean;
+    written: boolean;
+    read: boolean;
+}
+export interface InventoryItem extends Identity {
+
+}
+export interface MagicObject extends InventoryItem {
     maxThreads: number;
-    threads: Thread[];
-    discovered: GameEvent;
+    threads: ObjectThread[];
+    event: GameEvent;
 }
 
 export interface GameEvent {
     location: string
     date: string
     description: string
-
 }
 
 export interface Character {
@@ -65,30 +62,76 @@ export interface Character {
     discipline: Discipline
     circle: number
     attributes: {
-        Dexterity: number
-        Strength: number
-        Toughness: number
-        Perception: number
-        Willpower: number
-        Charisma: number
+        dexterity: Attribute
+        strength: Attribute
+        toughness: Attribute
+        perception: Attribute
+        willpower: Attribute
+        charisma: Attribute
     },
-    //computed getters
-    readonly initiative: number
-    readonly speed: number
-    readonly defense: number
-    readonly woundThreshold: number
-    talents: [Talent]
+    currentKarma: number
+    maximumKarma: number
+    talents: { [id: string]: Talent }
+    specialisations: { [id: string]: TalentSpecialisation }
+    skills: { [id: string]: ProgressionSkill }
+    inventory?: [InventoryItem]
+    languages: { [lang: string]: Language }
+    spells?: { [id: string]: Spell }
+    legendPoints: number
+}
+export interface Identity {
+    readonly id: string
+    readonly name: string
+    readonly description: string
+}
+export interface ProgressionSkill extends Identity, BookReference {
+    rank: number
+    readonly attribute: string
+    readonly action: boolean
+    readonly effort?: Effort
+    readonly karma?: boolean
+}
+export interface Talent extends ProgressionSkill {
+    readonly discipline?: boolean;
 }
 
-//The Character interface is a TypeScript interface that defines the structure of a character object. It is used to define the type of the character object in the Character component.
+export class Effort {
+    readonly value: number
+    readonly canMutate?: boolean
+    constructor(value: number) {
+        this.value = value;
+    }
+}
+export interface TalentSpecialisation extends Identity, BookReference {
+    readonly Discipline: Discipline
+    readonly talent: Talent
+    readonly rank: number
+    readonly effort?: Effort
+}
 
-// create an interface to properly define talents. circle of the talent, current rank, if it's discipline, has effort and karma and the page in the book associated with it
-export interface Talent {
-    id: string,
-    circle: number;
-    rank: number;
-    discipline: boolean;
-    effort?: number;
-    karma?: boolean;
-    page: number;
+
+export interface Spell extends Identity, BookReference {
+    circle: number
+    readonly discipline: Discipline.wizard | Discipline.necromancer | Discipline.elementalist | Discipline.illusionist
+    threads: number
+    weavingDifficulty: number
+    harmonizationDifficulty: number
+    range: number | "personal"
+    duration: RankDuration | FixedDuration
+    effect: string
+    difficulty: string
+
+}
+export interface FixedDuration {
+    value: number
+    unit: "round" | "hour" | "day" | "week" | "month" | "year"
+}
+
+export interface RankDuration extends FixedDuration {
+    rank: number
+
+}
+
+export enum CastingDifficulty {
+    TMD = "$t.spells.castingDifficulty.targetMagicDefense",
 }

@@ -1,16 +1,28 @@
 
-
+export enum BaseAttribute {
+    "strength",
+    "dexterity",
+    "toughness",
+    "perception",
+    "willpower",
+    "charisma"
+}
 export class Attribute {
-    value: number;
-    constructor(value: number) {
-        this.value = value;
+    base: number;
+    bonus: number;
+    constructor(value: number, bonus: number = 0) {
+        this.base = value;
+        this.bonus = bonus;
+    }
+    value(): number {
+        return this.base + this.bonus;
     }
     level(): number {
-        return Math.floor((this.value - 1) / 3) + 2;
+        return Math.floor((this.value() - 1) / 3) + 2;
     }
     defense(): number {
         const base = [2, 2, 3, 3, 4, 4, 4];
-        const value = this.value;
+        const value = this.value();
         if (value < 1) {
             throw new Error("Invalid input value");
         }
@@ -20,7 +32,7 @@ export class Attribute {
         return base[cycleStep] + cycleIndex * 3;
     }
     _movement(): number {
-        const value = this.value;
+        const value = this.value();
         if (value < 1) {
             throw new Error("Invalid input value");
         }
@@ -57,7 +69,7 @@ export class Attribute {
 
     _capacity(): number {
         const base = [5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 95, 110, 125, 140, 160, 180, 200, 230, 260, 290, 330, 370, 410, 460, 510, 560, 620, 680, 740, 810, 880, 950, 1030, 1110, 1190, 1280, 1370, 1460, 1560, 1660, 1760, 1870, 1980, 2090, 2210, 2330, 2450, 2580, 2710];
-        let value = this.value;
+        let value = this.value();
         if (value < 1) {
             throw new Error("Invalid input value");
         }
@@ -73,7 +85,7 @@ export class Attribute {
     }
     unconsciousThreshold() {
         const base = [1, 2, 4];
-        const value = this.value - 1;
+        const value = this.value() - 1;
         if (value < 0) {
             throw new Error("Invalid input value");
         }
@@ -92,7 +104,7 @@ export class Attribute {
         return this.unconsciousThreshold() + 9;
     }
     greviousWound() {
-        let value = this.value;
+        let value = this.value();
         if (value < 1) {
             throw new Error("Invalid input value");
         }
@@ -109,7 +121,7 @@ export class Attribute {
         return 21 + Math.floor((value % 7) / 4) + Math.floor(value / 7) * 2;
     }
     recoveryTest(): number {
-        const value = this.value;
+        const value = this.value();
         if (value < 1) {
             throw new Error("Invalid input value");
         }
@@ -121,7 +133,7 @@ export class Attribute {
         return Math.floor((value + 4) / 6);
     }
     mysticalArmor(): number {
-        const value = this.value;
+        const value = this.value();
 
         if (value < 1) {
             throw new Error("Invalid input value");
