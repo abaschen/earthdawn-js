@@ -108,11 +108,40 @@ export class Attribute {
         // from 40
         return 21 + Math.floor((value % 7) / 4) + Math.floor(value / 7) * 2;
     }
+    recoveryTest(): number {
+        const value = this.value;
+        if (value < 1) {
+            throw new Error("Invalid input value");
+        }
+
+        if (value <= 2) {
+            return 0.5;
+        }
+        ; //offset to match the table starting at 3 but ignoring the previous 2
+        return Math.floor((value + 4) / 6);
+    }
+    mysticalArmor(): number {
+        const value = this.value;
+
+        if (value < 1) {
+            throw new Error("Invalid input value");
+        }
+
+        if (value <= 10) {
+            return 0;
+        }
+        ; //offset to match the table starting at 10
+        return Math.floor((value - 8) / 3);
+    }
+
 }
-console.log(`| value | level | defense | combat movement | run movement | transport capacity | lifting capacity | unconscious threshold | death threshold | grevious wound |`);
-console.log('| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |');
-// print attributes from 1 to 50
-for (let i = 1; i <= 50; i++) {
-    const attribute = new Attribute(i);
-    console.log(`| ${i} | ${attribute.level()} | ${attribute.defense()} | ${attribute.combatMovement()} | ${attribute.runMovement()} | ${attribute.transportCapacity()} | ${attribute.liftingCapacity()} | ${attribute.unconsciousThreshold()} | ${attribute.deathThreshold()} | ${attribute.greviousWound()} |`);
+
+function printTable() {
+    console.log(`| value | level | defense | combat movement | run movement | transport capacity | lifting capacity | unconscious threshold | death threshold | grevious wound | recovery test | mytical armor |`);
+    console.log('| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |');
+    // print attributes from 1 to 50
+    for (let i = 1; i <= 50; i++) {
+        const attribute = new Attribute(i);
+        console.log(`| ${i} | ${attribute.level()} | ${attribute.defense()} | ${attribute.combatMovement()} | ${attribute.runMovement()} | ${attribute.transportCapacity()} | ${attribute.liftingCapacity()} | ${attribute.unconsciousThreshold()} | ${attribute.deathThreshold()} | ${attribute.greviousWound()} | ${attribute.recoveryTest()} | ${attribute.mysticalArmor()} |`);
+    }
 }
