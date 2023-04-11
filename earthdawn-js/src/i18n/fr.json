@@ -15,12 +15,34 @@
         "blacksmith": "Forgeron",
         "wizard": "Sorcier"
     },
-    "attributes": {
+    "stats":{
         "strength": "Force",
         "dexterity": "Dextérité",
-        "constitution": "Constitution",
-        "intelligence": "Intelligence",
-        "wisdom": "Sagesse",
-        "charisma": "Charisme"
+        "perception": "Perception",
+        "toughness": "Constitution",
+        "willpower": "Volonté",
+        "charisma": "Charisme",
+        
+        "physdef": "Défense Phys.",
+        "magicdef": "Défense Magique",
+        "armor":"Armure",
+        "mysticarmor":"Armor Mystique",
+        "initiative": "Initiative",
+        "wounds": "Blessures Graves"
+    },
+    "stats_short":{
+        "strength": "FOR",
+        "dexterity": "DEX",
+        "perception": "PER",
+        "toughness": "CON",
+        "willpower": "VOL",
+        "charisma": "CHA",
+        
+        "physdef": "DefP",
+        "magicdef": "DefM",
+        "armor":"Armure",
+        "mysticarmor":"ArmureM",
+        "initiative": "Init",
+        "wounds": "Blessures"
     }
 }

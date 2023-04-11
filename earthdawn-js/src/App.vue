@@ -1,77 +1,37 @@
 <script setup lang="ts">
-import CharacterSheet from './components/CharacterSheet.vue';
-import { Attribute } from './types/Attributes';
-import { CastingDifficulty, Character, Discipline } from './types/Character';
+import StatsBanner from './components/StatsBanner.vue';
 
-const character: Character = {
-  name: "Therandir",
-  race: "windling",
-  discipline: Discipline.wizard,
-  circle: 8,
-  currentKarma: 60,
-  maximumKarma: 60,
-  specialisations: {},
-  attributes: {
-    dexterity: new Attribute(16),
-    strength: new Attribute(14),
-    toughness: new Attribute(14),
-    perception: new Attribute(14),
-    willpower: new Attribute(16),
-    charisma: new Attribute(14),
-  },
-  "talents": {
-    "spellcasting": {
-      id: "spellcasting",
-      name: "$t.talents.spellcasting.name",
-      description: "$t.talents.spellcasting.description",
-      discipline: true,
-      rank: 20,
-      attribute: "perception",
-      action: true,
-      page: {
-        fr: 190
-      }
-
-    }
-  },
-  "skills": {
-
-  },
-  "languages": {
-    "throalic": {
-      id: "throalic",
-      read: true,
-      written: true,
-      spoken: true
-    },
-
-  },
-  "spells": {
-    "fireball": {
-      id: "fireball",
-      name: "$t.spells.fireball.name",
-      description: "$t.spells.fireball.description",
-      effect: "$t.spells.fireball.effect",
-      circle: 1,
-      discipline: Discipline.elementalist,
-      threads: 1,
-      weavingDifficulty: 10,
-      harmonizationDifficulty: 15,
-      duration: { value: 1, unit: "round" },
-      difficulty: CastingDifficulty.TMD,
-      range: 10,
-      page: {
-        fr: 190
-      }
-    }
-  },
-  legendPoints: 220000
-}
 
 </script>
 
 <template>
-  <v-app>
-    <CharacterSheet :character="character" />
+  <v-app class="app">
+    <StatsBanner class="banner">
+      <!-- Display the 6 base stats, initiative, and defenses here -->
+      <!-- You can use Vuetify's layout components to create a responsive grid -->
+    </StatsBanner>
+    <div class="main">
+      <router-view></router-view>
+      <!-- This will render the component associated with the current route -->
+    </div>
   </v-app>
 </template>
+
+<style>
+  .app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .banner {
+    /* Style the banner here */
+    /* You can use Vuetify's typography and color classes to style the text */
+  }
+
+  .main {
+    flex: 1;
+    /* Style the rest of the page here */
+    /* You can use Vuetify's layout components and card component to style the content */
+  }
+</style>

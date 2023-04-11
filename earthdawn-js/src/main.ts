@@ -1,22 +1,16 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-import messages from './i18n'
-// Vuetify
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-import { createI18n } from 'vue-i18n'
 
-const vuetify = createVuetify({
-    components,
-    directives,
-})
-const i18n = createI18n({
-    locale: 'fr',
-    fallbackLocale: 'en',
-    messages,
-})
+import vuetify from './plugins/vuetify';
+import i18n from './plugins/i18n';
+import router from './plugins/router';
+import store from './plugins/store';
 
-createApp(App).use(vuetify).use(i18n).mount('#app')
+
+createApp(App)
+    .use(vuetify)
+    .use(i18n)
+    .use(router)
+    .use(store)
+    .mount('#app')

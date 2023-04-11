@@ -7,6 +7,16 @@ export enum BaseAttribute {
     "willpower",
     "charisma"
 }
+
+export const baseAttributes = [
+    BaseAttribute[BaseAttribute.strength],
+    BaseAttribute[BaseAttribute.dexterity],
+    BaseAttribute[BaseAttribute.toughness],
+    BaseAttribute[BaseAttribute.perception],
+    BaseAttribute[BaseAttribute.willpower],
+    BaseAttribute[BaseAttribute.charisma],
+];
+
 export class Attribute {
     base: number;
     bonus: number;

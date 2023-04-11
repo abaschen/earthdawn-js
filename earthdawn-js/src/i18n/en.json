@@ -14,5 +14,36 @@
         "warrior": "Warrior",
         "blacksmith": "Blacksmith",
         "wizard": "Wizard"
+    },
+    "stats":{
+        "strength": "Strength",
+        "dexterity": "Dexterity",
+        "perception": "Perception",
+        "toughness": "Thoughness",
+        "willpower": "Willpower",
+        "charisma": "Charisma",
+        
+        "physdef": "Phys. Defense",
+        "magicdef": "Magic Defense",
+        "armor":"Armor",
+        "mysticarmor":"Mystic Armor",
+        "initiative": "Initiative",
+        "wounds": "Wounds"
+    },
+    "stats_short":{
+        "strength": "Str",
+        "dexterity": "Dex",
+        "perception": "Per",
+        "toughness": "Tho",
+        "willpower": "Wil",
+        "charisma": "Cha",
+        
+        "physdef": "PDef",
+        "magicdef": "MDef",
+        "armor":"PArmor",
+        "mysticarmor":"MArmor",
+        "initiative": "Init",
+        "wounds": "Wounds"
     }
+
 }
